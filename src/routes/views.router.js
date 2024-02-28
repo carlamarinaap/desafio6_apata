@@ -62,7 +62,7 @@ router.get("/products", async (req, res) => {
   }
 });
 
-router.get("/api/sessions/register", async (req, res) => {
+router.get("/register", async (req, res) => {
   if (req.session.user) {
     res.redirect("/products");
   } else {
@@ -78,7 +78,7 @@ router.get("/login", async (req, res) => {
   }
 });
 
-router.get("/api/sessions/profile", async (req, res) => {
+router.get("/profile", async (req, res) => {
   if (req.session.user) {
     res.render("profile", req.session.user);
   } else {

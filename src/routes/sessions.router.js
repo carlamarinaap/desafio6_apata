@@ -7,12 +7,12 @@ const router = express.Router();
 router.post("/register", async (req, res) => {
   const { first_name, last_name, age, email, password, confirm } = req.body;
   if (!first_name || !last_name || !age || !email || !password || !confirm) {
-    res.redirect("/api/sessions/register");
+    res.redirect("/register");
   } else {
     if (password === confirm) {
       const exists = await um.getUser(email);
       if (exists) {
-        res.redirect("/api/sessions/register");
+        res.redirect("/register");
       } else {
         const user = { first_name, last_name, age, email, password, is_admin: false };
         const addUser = await um.addUser(user);
@@ -22,7 +22,7 @@ router.post("/register", async (req, res) => {
         }
       }
     } else {
-      res.redirect("/api/sessions/register");
+      res.redirect("/register");
     }
   }
 });
@@ -34,7 +34,7 @@ router.post("/login", async (req, res) => {
     req.session.user = user;
     res.redirect("/products");
   } else {
-    res.redirect("/api/sessions/register");
+    res.redirect("/register");
   }
 });
 
