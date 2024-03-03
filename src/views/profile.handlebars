@@ -8,6 +8,8 @@
         {{this.last_name}}</p>
       <p class="card-text text-start">Edad: {{this.age}}</p>
       <p class="card-text text-start">Correo: {{this.email}}</p>
+      <p class="card-text text-start">Rol:
+        {{#if this.is_admin}} Administrador {{else}} Usuario {{/if}}</p>
       <a href="#" class="btn btn-primary">Editar</a>
     </div>
   </div>
