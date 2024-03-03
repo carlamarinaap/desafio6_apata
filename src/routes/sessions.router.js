@@ -29,10 +29,16 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   let { email, password } = req.body;
-  const user = await um.getUserByCreds(email, password);
+  const user = await um.getUser(email);
   if (user) {
-    req.session.user = user;
-    res.redirect("/products");
+    const userCred = await um.getUserByCreds(email, password);
+    if (userCred) {
+      req.session.user = user;
+      res.redirect("/products");
+    } else {
+      let msg = "Constraseña incorrecta";
+      res.render("login", { msg });
+    }
   } else {
     res.redirect("/register");
   }

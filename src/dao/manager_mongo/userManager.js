@@ -9,9 +9,11 @@ class UserManager {
       throw new Error(`Error al agregar producto: ${error.message}`);
     }
   };
+
   getUser = async (email) => {
     return await UserSchema.findOne({ email });
   };
+
   getUserByCreds = async (email, password) => {
     return await UserSchema.findOne({ email, password });
   };
