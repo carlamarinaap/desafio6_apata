@@ -46,12 +46,13 @@
         <h5 class="card-title">{{this.title}}</h5>
         <p class="card-text">{{this.description}}</p>
         <p class="card-text">$ {{this.price}}</p>
-        <button disabled onclick="deleteProd('{{this.id}}')" class="btn btn-danger">Eliminar</button>
+        <button onclick="deleteProd('{{this.id}}')" class="btn btn-danger">Eliminar</button>
       </div>
     </div>
   {{/each}}
 
 </div>
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/socket.js"></script>

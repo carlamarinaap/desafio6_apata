@@ -31,7 +31,7 @@ socket.on("card", (data) => {
         <h5 class="card-title">${prod.title}</h5>
         <p class="card-text">${prod.description}</p>
         <p class="card-text">$ ${prod.price}</p>
-        <button disabled onclick="deleteProd('${this.id}')" class="btn btn-danger">Eliminar</button>
+        <button onclick="deleteProd('${prod.id}')" class="btn btn-danger">Eliminar</button>
       </div>
     </div>
     `;
@@ -39,22 +39,21 @@ socket.on("card", (data) => {
   productList.innerHTML = allCArds.join("");
 });
 
-// const deleteProd = (prod) => {
-//   Swal.fire({
-//     title: "Estas seguro que querés eliminar este producto?",
-//     showCancelButton: true,
-//     confirmButtonColor: "#198754",
-//     cancelButtonColor: "#d33",
-//     confirmButtonText: "Si, eliminalo!",
-//   }).then((result) => {
-//     if (result.isConfirmed) {
-//       socket.emit("deleteProduct", prod);
-//       Swal.fire({
-//         title: "Eliminado!",
-//         text: "El producto fue eliminado con éxito",
-//         icon: "success",
-//       }).then(() => {
-//       });
-//     }
-//   });
-// };
+const deleteProd = (prod) => {
+  Swal.fire({
+    title: `Estas seguro que querés eliminar este producto? ${prod}`,
+    showCancelButton: true,
+    confirmButtonColor: "#198754",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Si, eliminalo!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      socket.emit("deleteProduct", prod);
+      Swal.fire({
+        title: "Eliminado!",
+        text: "El producto fue eliminado con éxito",
+        icon: "success",
+      }).then(() => {});
+    }
+  });
+};

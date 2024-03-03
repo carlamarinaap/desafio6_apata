@@ -86,7 +86,6 @@ socketServer.on("connection", (socket) => {
     socketServer.emit("chat", messages);
   });
   socket.on("newMessage", async (data) => {
-    console.log(`Desde app.js: ${JSON.stringify(data)}`);
     await mm.addMessage(data);
     const messages = await mm.getMessages();
     socketServer.emit("chat", messages);
@@ -97,9 +96,10 @@ socketServer.on("connection", (socket) => {
     socketServer.emit("chat", messages);
   });
 
-  // socket.on("deleteProduct", async (data) => {
-  //   await pm.deleteProduct(data);
-  //   const products = await pm.getProducts();
-  //   socketServer.emit("card", products);
-  // });
+  socket.on("deleteProduct", async (prodId) => {
+    await pm.deleteProduct(prodId);
+    const products = await pm.getProducts();
+    const allProducts = await pm.getProducts(products.totalDocs);
+    socketServer.emit("card", allProducts);
+  });
 });
